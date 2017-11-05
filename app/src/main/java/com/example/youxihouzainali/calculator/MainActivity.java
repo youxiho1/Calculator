@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public Button BtnEqual, BtnC, BtnCE, BtnRooting, BtnBack, BtnMod, BtnSquare;
     public TextView textView;
 
-
     private void setButtonListener(int viewId) {                        //绑定监听器
         Button but = (Button) findViewById(viewId);
         but.setOnClickListener(this);
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         flag = 1;
         flag1 = flag2 = flag3 = flag4 =flagPoint = point= 0;
         d1 = d2 = d3 = 0;
-        BtnMod.setEnabled(true);
+        /*BtnMod.setEnabled(true);
         BtnRooting.setEnabled(true);
         BtnSquare.setEnabled(true);
         BtnReciprocal.setEnabled(true);
@@ -132,10 +131,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtnPlus.setEnabled(true);
         BtnSign.setEnabled(true);
         BtnPoint.setEnabled(true);
+        */
     }
 
     public void pause() {
         flag4 = 1;
+        /*
         BtnMod.setEnabled(false);
         BtnRooting.setEnabled(false);
         BtnSquare.setEnabled(false);
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtnPlus.setEnabled(false);
         BtnSign.setEnabled(false);
         BtnPoint.setEnabled(false);
+        */
         result = numbertemp = number1 = number3 = "0";                       //清零操作
         num = flag1 = flag2 = flag3 = flagPoint = point = 0;
         flag = 1;
@@ -401,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 d1 = Double.parseDouble(numbertemp);
                 if(d1 < 0) {
                     textView.setText("无效输入");
-                    //pause();
+                    pause();
                 }
                 else {
                     result = numbertemp = String.valueOf(sqrt(d1));
@@ -427,7 +429,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 d1 = Double.parseDouble(numbertemp);
                 if(d1 > 1e8 || d1 < -1e8) {
                     textView.setText("溢出");
-                    //pause();
+                    pause();
                 }
                 else {
                     BigDecimal f1 = new BigDecimal(numbertemp);
@@ -455,7 +457,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 d1 = Double.parseDouble(numbertemp);
                 if(d1 == 0) {
                     textView.setText("除数不能为零");
-                    //pause();
+                    pause();
                 }
                 else {
                     result = numbertemp = String.valueOf(1.0 / d1);
@@ -531,6 +533,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             flagPoint = 0;
                         result = numbertemp = numbertemp.substring(0, length - 1);
                         num = num - 1;
+                        if(numbertemp.equals("-"))
+                            numbertemp = "0";
                         if(flag3 == 0)
                             number1 = result;
                         else if(flag3 == 1)
@@ -552,6 +556,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     flagPoint = 0;
                     //numbertemp = "0";
                 }
+                flag5 = 1;
                 flag = 4;
                 break;
             case R.id.BtnMultiply:
@@ -566,6 +571,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     num = 0;
                     flagPoint = 0;
                 }
+                flag5 = 1;
                 flag = 3;
                 break;
             case R.id.BtnMinus:
@@ -580,6 +586,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     num = 0;
                     flagPoint = 0;
                 }
+                flag5 = 1;
                 flag = 2;
                 break;
             case R.id.BtnPlus:
@@ -594,6 +601,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     num = 0;
                     flagPoint = 0;
                 }
+                flag5 = 1;
                 flag = 1;
                 break;
             case R.id.BtnSign:
@@ -680,9 +688,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //flag在上一次计算末尾后没有清零
             number2 = number3;
         else if(flag2 == 0 && flag3 == 0) {            //实现2=2的逻辑
-            number1 = numbertemp;
+            /*number1 = numbertemp;
             flag = 1;
             number2 = "0";
+            */
+            number1 = numbertemp;
+            num = 0;
+            flagPoint = 0;
+            number2 = number3;
         }
         else if(flag1 == 0 && flag2 == 0)               //实现+=的逻辑
             //number1在上一次计算的末尾被赋值成了result
@@ -718,12 +731,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(number2.equals("0"))
                     if(number1.equals("0")) {
                         textView.setText("结果未定义");
-                        //pause();
+                        pause();
                         return;
                     }
                     else {
                         textView.setText("除数不能为零");
-                        //pause();
+                        pause();
                         return;
                     }
                 else{
@@ -734,7 +747,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(d3 > 1e17) {
             textView.setText("溢出");
-            //pause();
+            pause();
         }
         else {
             result = adjust(result);
