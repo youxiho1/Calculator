@@ -688,14 +688,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //flag在上一次计算末尾后没有清零
             number2 = number3;
         else if(flag2 == 0 && flag3 == 0) {            //实现2=2的逻辑
-            /*number1 = numbertemp;
+            number1 = numbertemp;
             flag = 1;
             number2 = "0";
-            */
-            number1 = numbertemp;
+            /*number1 = numbertemp;
             num = 0;
             flagPoint = 0;
             number2 = number3;
+            */
         }
         else if(flag1 == 0 && flag2 == 0)               //实现+=的逻辑
             //number1在上一次计算的末尾被赋值成了result
